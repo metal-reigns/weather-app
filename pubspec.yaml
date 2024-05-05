@@ -1,0 +1,32 @@
+name: weather_app
+description: "weather_app"
+version: 1.0.0+1
+environment:
+  sdk: '>=3.3.1 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.8
+  http: ^1.2.1
+  provider: ^6.1.2
+  shared_preferences: ^2.2.3
+  intl: ^0.19.0
+  flutter_svg: ^2.0.10+1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  build_web_compilers: ^4.0.10
+  flutter_lints: ^3.0.2
+
+flutter:
+  assets:
+    - assets/clear_sky.svg
+    - assets/thunderstorm.svg
+    - assets/scattered_clouds.svg
+    - assets/rain.svg
+    - assets/snow.svg
+    - assets/mist.svg
+  uses-material-design: true

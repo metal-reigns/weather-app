@@ -1,0 +1,25 @@
+<svg width="353" height="203" viewBox="0 0 353 203" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g filter="url(#filter0_d_6_276)">
+<g clip-path="url(#clip0_6_276)">
+<path d="M5 46C5 23.9086 22.9086 6 45 6H340V151C340 173.091 322.091 191 300 191H5V46Z" fill="#59678C"/>
+<path d="M111.215 68.4072C59.3945 51.2041 55.7822 -3.33972 60.4536 -28.4612L402.919 -31.7528C409.972 -3.79378 425.304 62.7332 430.203 105.169C436.328 158.213 404.429 125.33 344.197 138.448C283.965 151.565 310.647 79.7662 254.313 60.3939C197.98 41.0215 176.565 76.6296 111.215 68.4072Z" fill="white" fill-opacity="0.37"/>
+<path d="M38.0401 92.7179C-20.4015 75.5774 -24.4097 21.034 -19.1086 -4.09518L367.257 -7.80869C375.18 20.1437 392.394 86.6568 397.869 129.09C404.714 182.131 368.767 149.284 300.798 162.477C232.83 175.669 263.02 103.832 199.49 84.5278C135.96 65.2234 111.756 100.861 38.0401 92.7179Z" fill="white" fill-opacity="0.22"/>
+<path d="M2.66246 115.745C-59.5238 95.5885 -63.8445 31.6373 -58.2316 2.18138L352.768 -1.76889C361.225 31.0109 379.607 109.009 385.476 158.763C392.812 220.956 354.538 182.409 282.249 197.805C209.96 213.201 242 129.011 174.399 106.312C106.798 83.6127 81.0879 125.369 2.66246 115.745Z" fill="white" fill-opacity="0.1"/>
+</g>
+</g>
+<defs>
+<filter id="filter0_d_6_276" x="0" y="0" width="353" height="203" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset dx="4" dy="3"/>
+<feGaussianBlur stdDeviation="4.5"/>
+<feComposite in2="hardAlpha" operator="out"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_6_276"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_6_276" result="shape"/>
+</filter>
+<clipPath id="clip0_6_276">
+<path d="M5 46C5 23.9086 22.9086 6 45 6H340V151C340 173.091 322.091 191 300 191H5V46Z" fill="white"/>
+</clipPath>
+</defs>
+</svg>
