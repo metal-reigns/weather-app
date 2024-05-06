@@ -19,7 +19,7 @@ class _SettingDialogWidgetState extends State<SettingDialogWidget> {
       builder: (context, weatherProvider, child) {
         return Dialog(
           child: Container(
-            padding: const EdgeInsets.all(50),
+            padding: const EdgeInsets.all(15),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
