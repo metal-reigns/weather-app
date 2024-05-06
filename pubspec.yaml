@@ -23,10 +23,10 @@ dev_dependencies:
 
 flutter:
   assets:
-    - assets/clear_sky.svg
+    - assets/clear.svg
     - assets/thunderstorm.svg
-    - assets/scattered_clouds.svg
+    - assets/clouds.svg
     - assets/rain.svg
     - assets/snow.svg
-    - assets/mist.svg
+    - assets/smoke.svg
   uses-material-design: true

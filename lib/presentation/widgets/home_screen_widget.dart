@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:weather_app/ui/location_dialog_settings_widget.dart';
-import 'package:weather_app/ui/weather_list_widget.dart';
+import 'package:weather_app/presentation/widgets/setting_dialog_widget.dart';
+import 'package:weather_app/presentation/widgets/buttons/settings_button_widget.dart';
+import 'package:weather_app/presentation/widgets/weather_list_widget.dart';
 
 class HomeScreenWidget extends StatefulWidget {
   const HomeScreenWidget({super.key});
@@ -16,12 +17,12 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
       appBar: AppBar(title: const Text("Weather App")),
       body: Column(
         children: [
-          Expanded(child: WeatherList()),
-          // MainWeatherScreen(),
-          FloatingActionButton(
-            onPressed: () => showLocationDialog(context),
-            child: const Icon(Icons.add),
-          )
+          SettingsButtonWidget(
+            onPressed: () {
+              showLocationDialog(context);
+            },
+          ),
+          const Expanded(child: WeatherList()),
         ],
       ),
     );
@@ -31,8 +32,8 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return Dialog(
-          child: LocationDialog(),
+        return const Dialog(
+          child: SettingDialogWidget(),
         );
       },
     );
