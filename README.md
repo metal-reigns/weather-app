@@ -11,6 +11,7 @@ Weather App is a mobile application providing current weather information and fo
 - **Add and Remove Cities**: Users can add favorite cities for quick access to weather forecasts.
 - **Automatic Location Detection**: Using the user's IP address, the app automatically determines their location and displays the relevant weather.
 - **Dark and Light Theme**: Supports both light and dark UI themes.
+- **Change Localization**: En/Ru localization.
 
 ## Technologies
 
@@ -21,7 +22,9 @@ Weather App is a mobile application providing current weather information and fo
 
 ## Screenshots
 
-<img width="700" alt="image" src="https://github.com/metal-reigns/weather-app/assets/97628527/6d0e8182-388a-4b3b-b0d9-b60650f60e9b">
-<img width="700" alt="image" src="https://github.com/metal-reigns/weather-app/assets/97628527/d319a11a-ff95-49da-88f5-0372abb9b78f">
-<img width="700" alt="image" src="https://github.com/metal-reigns/weather-app/assets/97628527/84c11f05-190f-4f1e-8c8f-54f474e66c83">
+<img width="400" alt="image" src="https://github.com/metal-reigns/weather-app/assets/97628527/1c5b9c33-5ee5-476b-8688-f4f47161fd47">
+<img width="400" alt="image" src="https://github.com/metal-reigns/weather-app/assets/97628527/a56cde52-a7b2-46d7-b2e8-8bf096aa15f7">
+<img width="400" alt="image" src="https://github.com/metal-reigns/weather-app/assets/97628527/9ba0e9a0-f26c-4ed6-b4ce-580a0d427f69">
+<img width="400" alt="image" src="https://github.com/metal-reigns/weather-app/assets/97628527/40a7d599-ee25-4690-8c2e-a532593e2c2f">
+<video src='https://github.com/metal-reigns/weather-app/assets/97628527/4db7959d-3558-410b-90f0-0ff759a484f5' width=400/>
 
