@@ -18,3 +18,10 @@ Weather App is a mobile application providing current weather information and fo
 - **Provider**: Manages the application's state.
 - **SharedPreferences**: Stores user settings locally, such as selected cities and preferred theme.
 - **HTTP Client**: Interacts with REST APIs to fetch weather data.
+
+## Screenshots
+
+<img width="700" alt="image" src="https://github.com/metal-reigns/weather-app/assets/97628527/6d0e8182-388a-4b3b-b0d9-b60650f60e9b">
+<img width="700" alt="image" src="https://github.com/metal-reigns/weather-app/assets/97628527/d319a11a-ff95-49da-88f5-0372abb9b78f">
+<img width="700" alt="image" src="https://github.com/metal-reigns/weather-app/assets/97628527/84c11f05-190f-4f1e-8c8f-54f474e66c83">
+
