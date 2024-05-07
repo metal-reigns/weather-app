@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:weather_app/presentation/widgets/setting_dialog_widget.dart';
+import 'package:weather_app/i18n/translations.g.dart';
+import 'package:weather_app/presentation/widgets/dialog/setting_dialog_widget.dart';
 import 'package:weather_app/presentation/widgets/buttons/settings_button_widget.dart';
-import 'package:weather_app/presentation/widgets/weather_list_widget.dart';
+import 'package:weather_app/presentation/widgets/weather/weather_list_widget.dart';
 
 class HomeScreenWidget extends StatefulWidget {
   const HomeScreenWidget({super.key});
@@ -13,8 +14,9 @@ class HomeScreenWidget extends StatefulWidget {
 class _HomeScreenWidgetState extends State<HomeScreenWidget> {
   @override
   Widget build(BuildContext context) {
+    final t = TranslationProvider.of(context).translations;
     return Scaffold(
-      appBar: AppBar(title: const Text("Weather App")),
+      appBar: AppBar(title: Text(t.title)),
       body: Column(
         children: [
           SettingsButtonWidget(
@@ -32,7 +34,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return const Dialog(
+        return Dialog(
           child: SettingDialogWidget(),
         );
       },

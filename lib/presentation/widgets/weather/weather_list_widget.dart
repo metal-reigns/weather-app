@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:weather_app/data/models/weather_provider.dart';
+import 'package:weather_app/domain/models/weather_provider.dart';
 import 'package:weather_app/presentation/widgets/card/expansion_tile_widget.dart';
 import 'package:weather_app/presentation/widgets/card/weather_card_widget.dart';
 

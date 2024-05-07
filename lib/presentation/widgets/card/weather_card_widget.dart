@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:weather_app/configuration/configuration.dart';
 import 'package:weather_app/domain/entity/current_weather.dart';
+import 'package:weather_app/i18n/translations.g.dart';
 
 class WeatherCardWidget extends StatelessWidget {
   final CurrentWeather weather;
@@ -10,10 +11,23 @@ class WeatherCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final t = TranslationProvider.of(context).translations;
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
-        var isMobile = constraints.maxWidth < 600;
-        double cardWidth = isMobile ? constraints.maxWidth : 385;
+        bool isMobile = constraints.maxWidth < 475;
+        double cardWidth = isMobile ? constraints.maxWidth * 0.95 : 510;
+
+        double titleFontSize = isMobile ? 16 : 23;
+        double detailFontSize = isMobile ? 13 : 16;
+        double iconSize = isMobile ? 20 : 28;
+        EdgeInsets padding = isMobile
+            ? const EdgeInsets.only(top: 25, left: 15, right: 20, bottom: 5)
+            : const EdgeInsets.only(top: 45, left: 25, right: 20, bottom: 5);
+        String detailedDescription = weather.detailedDescription;
+        String shortDescription = detailedDescription.length > 19
+            ? '${detailedDescription.substring(0, 18)}...'
+            : detailedDescription;
+
         return Center(
           child: SizedBox(
             width: cardWidth,
@@ -24,96 +38,93 @@ class WeatherCardWidget extends StatelessWidget {
               child: Stack(
                 children: [
                   AspectRatio(
-                    aspectRatio: 335 / 185,
+                    aspectRatio: 315 / 185,
                     child: SvgPicture.asset(
                       _getWeatherBackground(weather.mainDescription),
                       fit: BoxFit.fill,
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(25.0),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    padding: padding,
+                    child: Column(
                       children: [
-                        SizedBox(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                children: [
-                                  Image.network(
-                                      '${Configuration.openWeather.imageUrl}/${weather.weatherIcon}.png'),
-                                  const SizedBox(
-                                    width: 10,
-                                  ),
-                                  Text(
-                                      '${weather.temperature.toStringAsFixed(1)}°C',
-                                      style: const TextStyle(
-                                          fontSize: 24,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.white)),
-                                  const SizedBox(
-                                    height: 70,
-                                  )
-                                ],
-                              ),
-                              InfoColumn(
-                                  icon: Icons.thumbs_up_down_outlined,
-                                  label: 'Feels like ',
-                                  value:
-                                      '${weather.feelsLike.toStringAsFixed(1)}°C'),
-                              InfoColumn(
-                                icon: Icons.water_drop,
-                                label: 'Humidity',
-                                value: '${weather.humidity}%',
-                              ),
-                              InfoColumn(
-                                icon: Icons.air,
-                                label: 'Wind',
-                                value:
-                                    '${weather.windSpeed.toStringAsFixed(1)} m/s',
-                              ),
-                            ],
-                          ),
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Row(
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  weather.cityName,
-                                  style: const TextStyle(
-                                    fontSize: 24,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
-                                  ),
-                                  overflow: TextOverflow.ellipsis,
+                                _TempWidget(
+                                    weather: weather,
+                                    titleFontSize: titleFontSize),
+                                SizedBox(height: isMobile ? 10 : 30),
+                                _InfoColumnWidget(
+                                  icon: Icons.thumbs_up_down_outlined,
+                                  label: '${t.feels_like}: ',
+                                  value:
+                                      '${weather.feelsLike.toStringAsFixed(1)}°C',
+                                  fontSize: detailFontSize,
+                                  iconSize: iconSize,
                                 ),
-                                const SizedBox(
-                                    width: 10), // Spacing between text and icon
-                                const Icon(Icons.location_on_outlined,
-                                    size: 32, color: Colors.white),
-                                const SizedBox(
-                                  height: 70,
-                                )
+                                _InfoColumnWidget(
+                                  icon: Icons.water_drop,
+                                  label: '${t.humidity}: ',
+                                  value: '${weather.humidity}%',
+                                  fontSize: detailFontSize,
+                                  iconSize: iconSize,
+                                ),
+                                _InfoColumnWidget(
+                                  icon: Icons.air,
+                                  label: '${t.wind_speed}: ',
+                                  value:
+                                      '${weather.windSpeed.toStringAsFixed(1)} ${t.speed_unit}',
+                                  fontSize: detailFontSize,
+                                  iconSize: iconSize,
+                                ),
                               ],
                             ),
-                            InfoColumn(
-                                icon: Icons.wb_cloudy_outlined,
-                                value: weather.detailedDescription),
-                            InfoColumn(
-                                icon: Icons.visibility,
-                                label: 'Visibility:',
-                                value:
-                                    '${(weather.visibility / 1000).toStringAsFixed(1)} km'),
-                            InfoColumn(
-                                icon: Icons.compress,
-                                label: 'Pressure',
-                                value: '${weather.pressure} hPa'),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                _LocalWidget(
+                                    iconSize: iconSize,
+                                    weather: weather,
+                                    titleFontSize: titleFontSize),
+                                SizedBox(height: isMobile ? 10 : 30),
+                                _InfoColumnWidget(
+                                  icon: Icons.wb_cloudy_outlined,
+                                  value: shortDescription,
+                                  fontSize: detailFontSize,
+                                  iconSize: iconSize,
+                                  label: '',
+                                ),
+                                _InfoColumnWidget(
+                                  icon: Icons.visibility,
+                                  label: '${t.visibility}:',
+                                  value:
+                                      '${(weather.visibility / 1000).toStringAsFixed(1)} ${t.distance_unit}',
+                                  fontSize: detailFontSize,
+                                  iconSize: iconSize,
+                                ),
+                                _InfoColumnWidget(
+                                  icon: Icons.compress,
+                                  label: '${t.pressure}: ',
+                                  value: '${weather.pressure} ${t.h_pa}',
+                                  fontSize: detailFontSize,
+                                  iconSize: iconSize,
+                                ),
+                              ],
+                            ),
                           ],
-                        )
+                        ),
+                        _InfoColumnWidget(
+                          icon: Icons.timelapse,
+                          label: '${t.last_update_time}: ',
+                          value: _timeAgo(weather.dateTime),
+                          fontSize: detailFontSize,
+                          iconSize: iconSize,
+                        ),
                       ],
                     ),
                   ),
@@ -144,35 +155,111 @@ class WeatherCardWidget extends StatelessWidget {
         return 'assets/mist.svg';
     }
   }
+
+  String _timeAgo(DateTime dateTime) {
+    final Duration difference = DateTime.now().difference(dateTime);
+
+    if (difference.inDays > 1) {
+      return '${difference.inDays} ${t.day_ago}';
+    } else if (difference.inHours > 1) {
+      return '${difference.inHours} ${t.hour_ago}';
+    } else if (difference.inMinutes > 1) {
+      return '${difference.inMinutes} ${t.minutes_ago}';
+    } else {
+      return t.now;
+    }
+  }
 }
 
-class InfoColumn extends StatelessWidget {
-  final IconData? icon;
-  final String? label;
-  final String value;
+class _LocalWidget extends StatelessWidget {
+  const _LocalWidget({
+    required this.iconSize,
+    required this.weather,
+    required this.titleFontSize,
+  });
 
-  const InfoColumn({
-    super.key,
-    this.icon,
-    this.label,
+  final double iconSize;
+  final CurrentWeather weather;
+  final double titleFontSize;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        const SizedBox(height: 60),
+        Icon(
+          Icons.location_on_outlined,
+          size: iconSize,
+          color: Colors.white,
+        ),
+        const SizedBox(width: 10),
+        Text(
+          weather.cityName,
+          style: TextStyle(
+            fontSize: titleFontSize,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
+          overflow: TextOverflow.ellipsis,
+        )
+      ],
+    );
+  }
+}
+
+class _TempWidget extends StatelessWidget {
+  const _TempWidget({
+    required this.weather,
+    required this.titleFontSize,
+  });
+
+  final CurrentWeather weather;
+  final double titleFontSize;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        const SizedBox(height: 60),
+        Image.network(
+            '${Configuration.openWeather.imageUrl}/${weather.weatherIcon}.png'),
+        const SizedBox(width: 10),
+        Text('${weather.temperature.toStringAsFixed(1)}°C',
+            style: TextStyle(
+                fontSize: titleFontSize,
+                fontWeight: FontWeight.bold,
+                color: Colors.white)),
+      ],
+    );
+  }
+}
+
+class _InfoColumnWidget extends StatelessWidget {
+  final IconData icon;
+  final String label;
+  final String value;
+  final double fontSize;
+  final double iconSize;
+
+  const _InfoColumnWidget({
+    required this.icon,
+    required this.label,
     required this.value,
+    required this.fontSize,
+    required this.iconSize,
   });
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Icon(
-          icon,
-          color: Colors.white,
-        ),
+        Icon(icon, color: Colors.white, size: iconSize),
         const SizedBox(
           width: 10,
-          height: 30,
+          height: 25,
         ),
-        Text(label ?? '',
-            style: const TextStyle(color: Colors.white, fontSize: 14)),
-        Text(value, style: const TextStyle(color: Colors.white, fontSize: 14)),
+        Text(label, style: TextStyle(color: Colors.white, fontSize: fontSize)),
+        Text(value, style: TextStyle(color: Colors.white, fontSize: fontSize)),
       ],
     );
   }

@@ -1,5 +1,4 @@
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:weather_app/services/theme/app_theme.dart';
 
 class SharedPreferencesManager {
   Future<void> saveLocations(List<String> locations) async {
@@ -13,12 +12,13 @@ class SharedPreferencesManager {
     return prefs.getStringList('saved_locations') ?? [];
   }
 
-  Future<void> removeLocation(String city) async {
+  Future<void> saveLocale(String locale) async {
     final prefs = await SharedPreferences.getInstance();
-    List<String> currentLocations = prefs.getStringList('locations') ?? [];
-    currentLocations.remove(city);
-    prefs.setStringList('locations', currentLocations);
+    await prefs.setString('locale', locale);
   }
 
-  Future<void> toggleTheme(AppTheme appTheme) async {}
+  Future<String> loadLocale() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString('locale') ?? 'en';
+  }
 }

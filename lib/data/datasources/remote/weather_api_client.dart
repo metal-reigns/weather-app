@@ -15,9 +15,9 @@ class WeatherApiClient {
     }
   }
 
-  Future<Map<String, dynamic>> fetchWeather(String city) async {
+  Future<Map<String, dynamic>> fetchWeather(String city, String locale) async {
     var url = Uri.parse(
-        '${Configuration.openWeather.host}/weather?q=$city&appid=${Configuration.openWeather.apiKey}&units=metric');
+        '${Configuration.openWeather.host}/weather?q=$city&appid=${Configuration.openWeather.apiKey}&units=metric&lang=$locale');
     var response = await http.get(url);
     if (response.statusCode == 200) {
       return jsonDecode(response.body);
@@ -27,9 +27,9 @@ class WeatherApiClient {
     }
   }
 
-  Future<List<dynamic>> fetchDailyForecast(String city) async {
+  Future<List<dynamic>> fetchDailyForecast(String city, String locale) async {
     var url = Uri.parse(
-        '${Configuration.openWeather.host}/forecast?q=$city&appid=${Configuration.openWeather.apiKey}&units=metric');
+        '${Configuration.openWeather.host}/forecast?q=$city&appid=${Configuration.openWeather.apiKey}&units=metric&lang=$locale');
     var response = await http.get(url);
     if (response.statusCode == 200) {
       return jsonDecode(response.body)['list'];

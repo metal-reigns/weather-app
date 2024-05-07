@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:weather_app/services/theme/app_colors.dart';
 import 'package:weather_app/configuration/configuration.dart';
 import 'package:weather_app/domain/entity/daily_weather.dart';
+import 'package:weather_app/i18n/translations.g.dart';
+import 'package:weather_app/services/theme/app_colors.dart';
 
 class ExpansionTileWidget extends StatelessWidget {
   final List<DailyWeather> dailyWeatherList;
@@ -14,14 +15,20 @@ class ExpansionTileWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Color backgroundColor = _getWeatherBackground(background);
-
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
-        var isMobile = constraints.maxWidth < 600;
-        double cardWidth = isMobile ? constraints.maxWidth : 385;
+        bool isMobile = constraints.maxWidth < 475;
+        double cardWidth = isMobile ? constraints.maxWidth * 0.95 : 510;
+        double titleFontSize = isMobile ? 12 : 16;
+        double detailFontSize = isMobile ? 12 : 14;
+        EdgeInsets padding = isMobile
+            ? const EdgeInsets.symmetric(horizontal: 15)
+            : const EdgeInsets.symmetric(horizontal: 20);
+
         Widget titleWidget = dailyWeatherList.isNotEmpty
-            ? buildTitleWidget(dailyWeatherList.first)
-            : const Text("No data available", style: TextStyle(fontSize: 16));
+            ? buildTitleWidget(dailyWeatherList.first, titleFontSize)
+            : Text("No data available",
+                style: TextStyle(fontSize: titleFontSize, color: Colors.white));
 
         return Container(
           width: cardWidth,
@@ -32,11 +39,12 @@ class ExpansionTileWidget extends StatelessWidget {
                 const BorderRadius.only(bottomRight: Radius.circular(20)),
           ),
           child: ExpansionTile(
-            tilePadding: const EdgeInsets.symmetric(horizontal: 10),
+            tilePadding: padding,
             title: titleWidget,
             trailing: const Icon(Icons.arrow_circle_down, color: Colors.white),
             children: dailyWeatherList
-                .map((dailyWeather) => buildWeatherRow(dailyWeather))
+                .map((dailyWeather) =>
+                    buildWeatherRow(dailyWeather, detailFontSize))
                 .toList(),
           ),
         );
@@ -44,43 +52,38 @@ class ExpansionTileWidget extends StatelessWidget {
     );
   }
 
-  Widget buildTitleWidget(DailyWeather weather) {
+  Widget buildTitleWidget(DailyWeather weather, double fontSize) {
     return Row(
       children: [
         const SizedBox(width: 10),
         Expanded(
           child: Text(
-            "${DateFormat('EEE dd').format(weather.dateTime)}, ${weather.dateTime.hour}:00 - ${weather.temperature.toStringAsFixed(1)}°C, ${weather.description}",
-            style: const TextStyle(color: Colors.white, fontSize: 16),
+            "${getWeekdayName(weather.dateTime)}, ${weather.dateTime.hour}:00 - ${weather.temperature.toStringAsFixed(1)}°C, ${weather.description}",
+            style: TextStyle(color: Colors.white, fontSize: fontSize),
           ),
         ),
       ],
     );
   }
 
-  Widget buildWeatherRow(DailyWeather dailyWeather) {
+  Widget buildWeatherRow(DailyWeather dailyWeather, double fontSize) {
     return Container(
       height: 40,
-      padding: const EdgeInsets.symmetric(horizontal: 20),
+      padding: const EdgeInsets.symmetric(horizontal: 30),
       decoration: const BoxDecoration(
         border: Border(bottom: BorderSide(color: Colors.white)),
       ),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          SizedBox(
-            width: 100,
-            child: Text(
-              '${DateFormat('EEE dd').format(dailyWeather.dateTime)}, ${dailyWeather.dateTime.hour}:00',
-              style: const TextStyle(color: Colors.white, fontSize: 14),
-            ),
+          Text(
+            '${getWeekdayName(dailyWeather.dateTime)}, ${dailyWeather.dateTime.hour}:00',
+            style: TextStyle(color: Colors.white, fontSize: fontSize),
           ),
-          Expanded(
-            child: Text(
-              "${dailyWeather.temperature.toStringAsFixed(1)}°C,   ${dailyWeather.description}",
-              style: const TextStyle(color: Colors.white, fontSize: 14),
-              textAlign: TextAlign.center,
-            ),
+          Text(
+            "${dailyWeather.temperature.toStringAsFixed(1)}°C, ${dailyWeather.description}",
+            style: TextStyle(color: Colors.white, fontSize: fontSize),
+            textAlign: TextAlign.center,
           ),
           SizedBox(
             height: 30,
@@ -109,6 +112,29 @@ class ExpansionTileWidget extends StatelessWidget {
         return AppColors.mistColor;
       default:
         return AppColors.mistColor; // Default color if no match found
+    }
+  }
+
+  String getWeekdayName(DateTime date) {
+    String weekday = DateFormat('EEEE').format(date).toLowerCase();
+
+    switch (weekday) {
+      case 'monday':
+        return t.days.monday;
+      case 'tuesday':
+        return t.days.tuesday;
+      case 'wednesday':
+        return t.days.wednesday;
+      case 'thursday':
+        return t.days.thursday;
+      case 'friday':
+        return t.days.friday;
+      case 'saturday':
+        return t.days.saturday;
+      case 'sunday':
+        return t.days.sunday;
+      default:
+        return '';
     }
   }
 }
