@@ -23,8 +23,7 @@ Weather App is a mobile application providing current weather information and fo
 ## Screenshots
 
 <img width="400" alt="image" src="https://github.com/metal-reigns/weather-app/assets/97628527/1c5b9c33-5ee5-476b-8688-f4f47161fd47">
-<img width="400" alt="image" src="https://github.com/metal-reigns/weather-app/assets/97628527/a56cde52-a7b2-46d7-b2e8-8bf096aa15f7">
 <img width="400" alt="image" src="https://github.com/metal-reigns/weather-app/assets/97628527/9ba0e9a0-f26c-4ed6-b4ce-580a0d427f69">
+<img width="400" alt="image" src="https://github.com/metal-reigns/weather-app/assets/97628527/a56cde52-a7b2-46d7-b2e8-8bf096aa15f7">
 <img width="400" alt="image" src="https://github.com/metal-reigns/weather-app/assets/97628527/40a7d599-ee25-4690-8c2e-a532593e2c2f">
-<video src='https://github.com/metal-reigns/weather-app/assets/97628527/4db7959d-3558-410b-90f0-0ff759a484f5' width=400/>
-
+<video src="https://github.com/metal-reigns/weather-app/assets/97628527/4db7959d-3558-410b-90f0-0ff759a484f5"></video>
